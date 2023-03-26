@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+}
+
+.d-none {
+    display: none;
+}
+
+.header {
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header img {
+    height: 100px;
+}
+
+.search {
+    display: flex;
+}
+
+.search input {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-right: 0;
+}
+
+.search input:focus {
+    outline-width: 0;
+}
+
+.search button {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: ease-in-out 225ms;
+}
+
+.search button:hover {
+    background-color: darkgray;
+    transition: ease-in-out 225ms;
+}
+
+#pokedex {
+    min-height: 50vh;
+    background-color: rgb(197, 45, 45);
+    color: white;
+}

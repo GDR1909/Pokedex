@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .d-none {
@@ -11,6 +13,8 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
 }
 
 .header img {
@@ -25,6 +29,8 @@ body {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-right: 0;
+    width: 140px;
+    height: 24px;
 }
 
 .search input:focus {
@@ -38,12 +44,30 @@ body {
 }
 
 .search button:hover {
+    cursor: pointer;
     background-color: darkgray;
     transition: ease-in-out 225ms;
 }
 
-#pokedex {
-    min-height: 50vh;
-    background-color: rgb(197, 45, 45);
-    color: white;
+.pokemonList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pokemonCard {
+    height: 200px;
+    width: 330px;
+    background-color: lightgray;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    transform: scale(1);
+    transition: ease-in-out 125ms;
+}
+
+.pokemonCard:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: ease-in-out 125ms;
 }

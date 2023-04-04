@@ -1,17 +1,42 @@
-let currentPokemon;
+let pokemonNames = [];
+let pokemonUrl = [];
+let renderedPokemonCount = 0;
+const blockLength = 50;
 
-
-async function loadPokemon() {
-    let url = 'https://pokeapi.co/api/v2/pokemon/charmander';
+async function init() {
+    let url = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=100000';
     let response = await fetch(url);
-    let currentPokemon = await response.json();
+    let allPokemons = await response.json();
+    console.log('Loaded Pokemon:', allPokemons);
 
-    console.log('Loaded pokemon:', currentPokemon);
+    allPokemons.results.forEach(pokemon => {
+        pokemonNames.push(pokemon.name);
+        pokemonUrl.push(pokemon.url);
+    });
 
-    renderPokemonInfo(currentPokemon);
+    renderPokemonCards();
 }
 
+function renderPokemonCards() {
+    let pokemonList = document.getElementById('pokemonList');
 
-function renderPokemonInfo(currentPokemon) {
-    document.getElementById('pokemonName').innerHTML = currentPokemon['name'];
+    // rendern des nächsten Blocks von 50 Elementen
+    for (let i = renderedPokemonCount; i < renderedPokemonCount + blockLength && i < pokemonNames.length; i++) {
+        pokemonList.innerHTML += /*html*/ `
+      <div class="pokemonCard" id="pokemonCard${i}">
+          <h2>${pokemonNames[i]}</h2>
+          <p>${[i + 1]}#</p>
+      </div>
+    `;
+    }
+
+    renderedPokemonCount += blockLength;
+
+    // Überwachung des Scrollens des Fensters
+    window.addEventListener('scroll', () => {
+        if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+            // das Ende des Fensters ist erreicht
+            renderPokemonCards();
+        }
+    });
 }

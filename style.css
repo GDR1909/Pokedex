@@ -2,6 +2,10 @@ body {
     margin: 0;
     margin-bottom: 10px;
     font-family: 'Roboto', sans-serif;
+    background-image: url(img/body-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .d-none {
@@ -15,38 +19,13 @@ body {
     align-items: center;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     margin-bottom: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .header img {
     height: 100px;
-}
-
-.search {
-    display: flex;
-}
-
-.search input {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-right: 0;
-    width: 140px;
-    height: 24px;
-}
-
-.search input:focus {
-    outline-width: 0;
-}
-
-.search button {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    transition: ease-in-out 225ms;
-}
-
-.search button:hover {
-    cursor: pointer;
-    background-color: darkgray;
-    transition: ease-in-out 225ms;
 }
 
 .pokemonList {
@@ -56,18 +35,284 @@ body {
 }
 
 .pokemonCard {
-    height: 200px;
-    width: 330px;
-    background-color: lightgray;
+    width: 250px;
+    background-color: antiquewhite;
     margin: 10px;
+    border: solid black 2px;
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px;
     transform: scale(1);
     transition: ease-in-out 125ms;
+    background-image: url(img/card-bg.png);
+    background-size: cover;
+}
+
+.pokemonCardNameAndNumber {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.pokemonCardTypesAndImg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pokemonCardTypes {
+    display: flex;
+    flex-direction: column;
+}
+
+.typesContainer {
+    border: solid 1px black;
+    height: 20px;
+    width: 70px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: navajowhite;
+    margin: 5px;
+}
+
+h2 {
+    margin: 0;
+}
+
+h2::first-letter {
+    text-transform: capitalize;
+}
+
+h1 {
+    margin: 0;
+}
+
+h1::first-letter {
+    text-transform: capitalize;
+}
+
+.pokemonCard img {
+    height: 110px;
+    width: 110px;
 }
 
 .pokemonCard:hover {
     cursor: pointer;
     transform: scale(1.03);
     transition: ease-in-out 125ms;
+}
+
+.popUpCardContainer {
+    height: 100vh;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+}
+
+.popUpCard {
+    height: 550px;
+    width: 400px;
+    background-color: antiquewhite;
+    border: solid black 2px;
+    border-radius: 10px;
+    background-image: url(img/card-bg.png);
+    background-size: cover;
+}
+
+.popUpCardTop {
+    background-image: url(img/body-bg.jpg);
+    background-size: cover;
+    padding: 10px 10px 0px 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: -10px;
+}
+
+.typesPopUpContainer {
+    display: flex;
+}
+
+.typesPopUp {
+    border: solid 1px black;
+    height: 20px;
+    width: 70px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: ghostwhite;
+    margin: 5px;
+}
+
+.popUpCardBottom {
+    padding: 0px 10px 10px 10px;
+}
+
+.popUpCard img {
+    height: 250px;
+    width: 250px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.navbar p {
+    text-decoration: underline transparent;
+    transition: ease-in-out 125ms;
+}
+
+.navbar p:hover {
+    cursor: pointer;
+    font-weight: bold;
+    transition: ease-in-out 125ms;
+}
+
+.tableAbout {
+    display: flex;
+    justify-content: center;
+    border-collapse: separate;
+    -webkit-border-horizontal-spacing: 35px;
+}
+
+.tdAbout {
+    background-color: ghostwhite;
+    border: solid 1px black;
+    border-radius: 10px;
+    text-align: center;
+    width: 150px;
+}
+
+.abilities {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+.abilities span {
+    background-color: ghostwhite;
+    border: solid 1px black;
+    border-radius: 10px;
+    text-align: center;
+    width: 150px;
+    margin-top: 2px;
+}
+
+.back-next-icons {
+    height: 40px;
+    margin: 10px;
+    transition: ease-in-out 125ms;
+}
+
+.back-next-icons:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: ease-in-out 125ms;
+}
+
+.pokemonCardTypesAndImgPopUp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.chartContainer {
+    margin-top: -20px;
+}
+
+.movesContainer {
+    height: 160px;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movesContainer span {
+    background-color: ghostwhite;
+    border: solid 1px black;
+    border-radius: 10px;
+    text-align: center;
+    padding: 2px;
+    margin: 2px;
+    height: 20px;
+}
+
+.movesContainer::-webkit-scrollbar {
+    width: 5px;
+}
+
+.movesContainer::-webkit-scrollbar-track {
+    display: none;
+}
+
+.movesContainer::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5px;
+}
+
+.movesContainer::-webkit-scrollbar-thumb:hover {
+    background: darkgray;
+}
+
+
+/*Responsive*/
+@media screen and (max-width: 515px) {
+    .tableAbout {
+        -webkit-border-horizontal-spacing: 15px;
+    }
+
+    .back-next-icons {
+        height: 30px;
+        margin: 2px;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .chartContainer {
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 455px) {
+    .tableAbout {
+        -webkit-border-horizontal-spacing: 0px;
+    }
+}
+
+@media screen and (max-width: 435px) {
+    .chartContainer {
+        width: 325px;
+    }
+}
+
+@media screen and (max-width: 410px) {
+    .chartContainer {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 385px) {
+    .chartContainer {
+        width: 270px;
+    }
+}
+
+@media screen and (max-width: 365px) {
+    .tdAbout {
+        width: 130px;
+    }
+
+    .abilities {
+        width: 130px;
+    }
+}
+
+@media screen and (max-width: 355px) {
+    .chartContainer {
+        width: 255px;
+    }
 }

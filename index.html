@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
 
 
     <link rel="stylesheet" href="style.css">
@@ -21,11 +21,17 @@
     </div>
 
     <div class="header">
-        <img src="/img/pokemon-logo.png">
+        <img src="./img/pokemon-logo.png">
+
+        <input type="text" placeholder="Search for Pokemon..." id="search" onkeyup="filterPokemons()">
     </div>
 
     <div class="pokemonList" id="pokemonList">
 
+    </div>
+
+    <div class="loadingContainer">
+        <span class="loadingSymbol d-none" id="loadingSymbol">Loading more Pokemon...</span>
     </div>
 </body>
 

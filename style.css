@@ -4,12 +4,16 @@ body {
     font-family: 'Roboto', sans-serif;
     background-image: url(img/body-bg.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
+    background-position: center;
     background-attachment: fixed;
 }
 
 .d-none {
     display: none;
+}
+
+.v-hidden {
+    visibility: hidden;
 }
 
 .header {
@@ -26,6 +30,17 @@ body {
 
 .header img {
     height: 100px;
+}
+
+input {
+    width: 150px;
+    padding: 5px;
+    border: solid 2px black;
+    border-radius: 10px;
+}
+
+input:focus {
+    outline: none;
 }
 
 .pokemonList {
@@ -258,6 +273,21 @@ h1::first-letter {
     background: darkgray;
 }
 
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.loadingSymbol {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    margin: 10px;
+    border: solid 1px black;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 0;
+}
+
 
 /*Responsive*/
 @media screen and (max-width: 515px) {
@@ -296,6 +326,10 @@ h1::first-letter {
 }
 
 @media screen and (max-width: 385px) {
+    input {
+        width: 135px;
+    }
+    
     .chartContainer {
         width: 270px;
     }

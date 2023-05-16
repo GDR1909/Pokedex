@@ -4,6 +4,7 @@ let pokemonData = [];
 let startPokemon = 0;
 let lastPokemon = 20;
 let isLoading = false;
+let filteredPokemon = [];
 
 
 async function init() {
@@ -66,7 +67,9 @@ function openPopUp(i) {
     document.getElementById('popUpCardContainer').classList.remove('d-none');
     document.getElementById('popUpCardContainer').classList.add('popUpCardContainer');
     document.getElementById('popUpCardContainer').innerHTML = templateOpenPopUp(i);
-
+    if (i == 0) {
+        document.getElementById('backIcon').style.visibility = 'hidden';
+    }
     renderTypesForPopUp(i);
 }
 
@@ -107,7 +110,6 @@ function renderAbilities(i) {
 
 
 function showStats(i) {
-    document.getElementById('showInfos').innerHTML = '';
     document.getElementById('showInfos').innerHTML = /*html*/ `
         <div class="chartContainer">
             <canvas id="myChart"></canvas>
@@ -144,12 +146,15 @@ function showStats(i) {
 
 
 function showMoves(i) {
-    document.getElementById('showInfos').innerHTML = '';
-    document.getElementById('showInfos').innerHTML = /*html*/ `<div class="movesContainer" id="movesContainer"></div>`;
+    document.getElementById('showInfos').innerHTML = /*html*/ `
+        <div class="movesContainer" id="movesContainer"></div>
+    `;
 
     for (let m = 0; m < pokemonData[i]['moves'].length; m++) {
         let move = pokemonData[i]['moves'][m]['move']['name'];
-        document.getElementById('movesContainer').innerHTML += /*html*/ `<span>${move.charAt(0).toUpperCase() + move.slice(1)}</span>`;
+        document.getElementById('movesContainer').innerHTML += /*html*/ `
+            <span>${move.charAt(0).toUpperCase() + move.slice(1)}</span>
+        `;
     }
 }
 
@@ -182,6 +187,7 @@ function closePopUp() {
 window.onscroll = function () {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         renderMorePokemonCards();
+        document.getElementById('loadingSymbol').classList.remove('d-none');
     }
 }
 
@@ -198,9 +204,52 @@ async function renderMorePokemonCards() {
         allLoadedPokemon = allLoadedPokemon.concat(moreLoadedPokemon['results'])
 
         pushAllPokemonUrl();
+
         setTimeout(() => {
             isLoading = false;
-        }, 2000)
+            document.getElementById('loadingSymbol').classList.add('d-none');
+        }, 3000)
+    }
+}
+
+
+function filterPokemons() {
+    filteredPokemon = [];
+    let search = document.getElementById('search').value;
+    search = search.toLowerCase();
+    console.log(search);
+
+    document.getElementById('pokemonList').innerHTML = '';
+
+    for (let i = 0; i < pokemonData.length; i++) {
+        if (pokemonData[i]['name'].toLowerCase().includes(search)) {
+            filteredPokemon.push(pokemonData[i]);
+        }
+    }
+    renderFilteredPokemons();
+}
+
+
+function renderFilteredPokemons() {
+    for (let f = 0; f < filteredPokemon.length; f++) {
+        let name = filteredPokemon[f]['name'];
+        let id = filteredPokemon[f]['id'].toString().padStart(4, '0');
+        let img = filteredPokemon[f]['sprites'];
+        
+        document.getElementById('pokemonList').innerHTML += templateRenderPokemonCards(f, name, id, img);
+    }
+    renderTypesForFilter();
+}
+
+
+function renderTypesForFilter() {
+    for (let i = 0; i < filteredPokemon.length; i++) {
+        for (let t = 0; t < filteredPokemon[i]['types'].length; t++) {
+            let type = filteredPokemon[i]['types'][t]['type']['name'];
+            document.getElementById(`types${i}`).innerHTML += /*html*/ `
+                <div class="typesContainer">${type.charAt(0).toUpperCase() + type.slice(1)}</div>
+            `;
+        }
     }
 }
 
@@ -226,7 +275,7 @@ function templateRenderPokemonCards(i, name, id, img) {
 
 function templateOpenPopUp(i) {
     return /*html*/ `
-        <img src="img/back.png" class="back-next-icons" onclick="doNotClose(event); back(${i})">
+        <img src="img/back.png" class="back-next-icons" id="backIcon" onclick="doNotClose(event); back(${i})">
 
         <div class="popUpCard" onclick="doNotClose(event)">
             <div class="popUpCardTop">
@@ -254,7 +303,7 @@ function templateOpenPopUp(i) {
             </div>
         </div>
 
-        <img src="img/next.png" class="back-next-icons" onclick="doNotClose(event); next(${i})">
+        <img src="img/next.png" class="back-next-icons" id="nextIcon" onclick="doNotClose(event); next(${i})">
     `;
 }
 
